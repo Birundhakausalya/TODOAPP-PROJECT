@@ -1,12 +1,43 @@
-# React + Vite
+**This project is a part of a hackathon run by https://www.katomaran.com**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**ARCHITECTURE DIAGRAM**
+┌─────────────────────────────────────────────┐
+│                Frontend (Expo App)          │
+│                                             │
+│  - React Native UI                          │
+│  - Expo Router for navigation               │
+│  - Google OAuth Login (expo-auth-session)   │
+│  - Task List UI, Animations, FAB etc.       │
+│                                             │
+│         ▲              |                    │
+│         │  Axios REST  |                    │
+│         │  API Calls   ▼                    │
+└─────────┼──────────────┼────────────────────┘
+          │              │
+          │              │
+┌─────────▼──────────────▼──────────────┐
+│            Node.js / Express API      │
+│                                        │
+│ - Routes:                              │
+│    • GET    /api/todos                 │
+│    • POST   /api/todos                 │
+│    • PUT    /api/todos/:id             │
+│    • DELETE /api/todos/:id             │
+│                                        │
+│ - All data stored in a shared in-memory│
+│   array accessible to all users        │
+│                                        │
+│ - No database involved                 │
+└─────────┬──────────────┬───────────────┘
+          │              │
+          │              │
+          │              │
+      ┌───▼──────────────▼───────────┐
+      │      External Services      │
+      │                             │
+      │ - Google OAuth2 Provider    │
+      │   • Handles login, tokens   │
+      │                             │
+      └─────────────────────────────┘
+      
+VIDEO LINK:https://drive.google.com/file/d/1dW2S98of4Ao-lN8EV4TNA5Zi9LUy1R1x/view?usp=sharing
